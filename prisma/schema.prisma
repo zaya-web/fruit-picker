@@ -15,16 +15,27 @@ model Worker {
   id          Int          @id @default(autoincrement())
   name        String
   phone       String?
-  status      String       @default("active")
+  status      WorkerStatus @default(ACTIVE)
   createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   workRecords WorkRecord[]
   payments    Payment[]
 }
 
+model Fruit {
+  id          Int          @id @default(autoincrement())
+  name        String
+  pricePerKg  Decimal
+  createdAt   DateTime     @default(now())
+
+  workRecords WorkRecord[]
+}
+
 model WorkRecord {
   id          Int      @id @default(autoincrement())
   workerId    Int
+  fruitId     Int
   date        DateTime
   kg          Decimal
   pricePerKg  Decimal
@@ -32,6 +43,11 @@ model WorkRecord {
   createdAt   DateTime @default(now())
 
   worker      Worker   @relation(fields: [workerId], references: [id])
+  fruit       Fruit    @relation(fields: [fruitId], references: [id])
+
+  @@index([workerId])
+  @@index([fruitId])
+  @@index([date])
 }
 
 model Payment {
@@ -42,4 +58,11 @@ model Payment {
   note      String?
 
   worker    Worker   @relation(fields: [workerId], references: [id])
+
+  @@index([workerId])
+}
+
+enum WorkerStatus {
+  ACTIVE
+  INACTIVE
 }
