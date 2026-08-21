@@ -1,4 +1,5 @@
 import { getWorkers } from '@/app/lib/data';
+import PageHeader from '@/app/ui/common/page-header';
 import { CreateWorker } from '@/app/ui/workers/buttons';
 import WorkersTable from '@/app/ui/workers/table';
 
@@ -7,10 +8,11 @@ export default async function WorkersPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Workers</h1>
-        <CreateWorker />
-      </div>
+      <PageHeader
+        title="Түүгчид"
+        subtitle={`Нийт ${workers.length} ажилтан`}
+        action={<CreateWorker />}
+      />
       <WorkersTable workers={workers} />
     </div>
   );

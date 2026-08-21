@@ -1,4 +1,6 @@
 import { getWorkerById } from '@/app/lib/data';
+import PageHeader from '@/app/ui/common/page-header';
+import { FormPage } from '@/app/ui/common/form-layout';
 import EditWorkerForm from '@/app/ui/workers/edit-form';
 
 export default async function EditWorkerPage({
@@ -8,9 +10,9 @@ export default async function EditWorkerPage({
   const worker = await getWorkerById(Number(id));
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Edit worker</h1>
+    <FormPage>
+      <PageHeader title="Түүгч засах" subtitle={worker.name} />
       <EditWorkerForm worker={worker} />
-    </div>
+    </FormPage>
   );
 }

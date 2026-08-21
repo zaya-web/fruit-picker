@@ -1,10 +1,12 @@
+import PageHeader from '@/app/ui/common/page-header';
+import { FormPage } from '@/app/ui/common/form-layout';
 import CreateWorkerForm from '@/app/ui/workers/create-form';
 
 export default function CreateWorkerPage() {
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Add worker</h1>
+    <FormPage>
+      <PageHeader title="Түүгч нэмэх" subtitle="Шинэ ажилтны үндсэн мэдээллийг бүртгэнэ" />
       <CreateWorkerForm />
-    </div>
+    </FormPage>
   );
 }

@@ -1,70 +1,82 @@
-import Link from 'next/link';
-import { updateWorker } from '@/app/lib/actions';
+'use client';
+
+import { useActionState } from 'react';
+import { updateWorker, type WorkerFormState } from '@/app/lib/actions';
+import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 import type { Worker } from '@prisma/client';
 
 export default function EditWorkerForm({ worker }: { worker: Worker }) {
+  const initialState: WorkerFormState = {
+    message: null,
+    values: {
+      name: worker.name,
+      phone: worker.phone ?? '',
+      bankAccount: worker.bankAccount ?? '',
+      status: worker.status,
+    },
+  };
+
   const updateWorkerWithId = updateWorker.bind(null, worker.id);
+  const [state, formAction, pending] = useActionState(
+    updateWorkerWithId,
+    initialState,
+  );
 
   return (
-    <form action={updateWorkerWithId} className="space-y-6">
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="mb-4">
-          <label htmlFor="name" className="mb-2 block text-sm font-medium">
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            defaultValue={worker.name}
-            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-green-700 dark:border-zinc-700 dark:bg-black"
-          />
-        </div>
+    <FormShell
+      action={formAction}
+      message={state.message}
+      cancelHref={`/dashboard/workers/${worker.id}`}
+      submitLabel="Өөрчлөлт хадгалах"
+      pending={pending}
+    >
+      <FormField label="Нэр" htmlFor="name">
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          defaultValue={state.values.name}
+          className={farmFieldClass}
+        />
+      </FormField>
 
-        <div className="mb-4">
-          <label htmlFor="phone" className="mb-2 block text-sm font-medium">
-            Phone
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            defaultValue={worker.phone ?? ''}
-            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-green-700 dark:border-zinc-700 dark:bg-black"
-          />
-        </div>
+      <FormField label="Утас" htmlFor="phone">
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          defaultValue={state.values.phone}
+          className={farmFieldClass}
+        />
+      </FormField>
 
-        <div>
-          <label htmlFor="status" className="mb-2 block text-sm font-medium">
-            Status
-          </label>
-          <select
-            id="status"
-            name="status"
-            defaultValue={worker.status}
-            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-green-700 dark:border-zinc-700 dark:bg-black"
-          >
-            <option value="ACTIVE">Active</option>
-            <option value="INACTIVE">Inactive</option>
-          </select>
-        </div>
-      </div>
+      <FormField
+        label="Дансны дугаар"
+        htmlFor="bankAccount"
+        hint="Дансаар төлбөр хийхэд ашиглагдана"
+      >
+        <input
+          id="bankAccount"
+          name="bankAccount"
+          type="text"
+          defaultValue={state.values.bankAccount}
+          placeholder="Жишээ: 5000123456"
+          className={farmFieldClass}
+        />
+      </FormField>
 
-      <div className="flex justify-end gap-3">
-        <Link
-          href="/dashboard/workers"
-          className="flex h-10 items-center rounded-lg px-4 text-sm font-medium text-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-900"
+      <FormField label="Төлөв" htmlFor="status">
+        <select
+          id="status"
+          name="status"
+          defaultValue={state.values.status}
+          className={farmFieldClass}
         >
-          Cancel
-        </Link>
-        <button
-          type="submit"
-          className="flex h-10 items-center rounded-lg bg-green-700 px-4 text-sm font-medium text-white hover:bg-green-600"
-        >
-          Save changes
-        </button>
-      </div>
-    </form>
+          <option value="ACTIVE">Идэвхтэй</option>
+          <option value="INACTIVE">Идэвхгүй</option>
+        </select>
+      </FormField>
+    </FormShell>
   );
 }

@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #26352a;
+  --secondary-bg: #f8f6f1;
+  --card: #ffffff;
+  --text-secondary: #68756b;
+  --text-muted: #9aa39b;
+  --farm-sage: #6f8f72;
+  --farm-deep: #355e3b;
+  --farm-fresh: #8fb996;
+  --accent-red: #e85d5d;
+  --accent-yellow: #f2c94c;
+  --accent-orange: #f2994a;
+  --accent-blue: #5b7db1;
+  --accent-buckthorn: #f4a340;
 }
 
 @theme inline {
@@ -12,15 +25,131 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Inter, system-ui, sans-serif;
+  line-height: 1.45;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--farm-fresh) 35%, transparent);
+}
+
+.farm-card {
+  background: var(--card);
+  border: 1px solid color-mix(in oklab, var(--farm-deep) 14%, #ffffff);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(53, 94, 59, 0.06);
+}
+
+.farm-form {
+  background: #ffffff;
+  border: 1px solid color-mix(in oklab, var(--farm-deep) 12%, #ffffff);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(53, 94, 59, 0.05);
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .farm-form {
+    padding: 1.5rem;
+  }
+}
+
+.farm-panel {
+  background: #ffffff;
+  border: 1px solid color-mix(in oklab, var(--farm-deep) 12%, #ffffff);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(53, 94, 59, 0.05);
+  overflow: hidden;
+}
+
+.farm-form-soft {
+  background: color-mix(in oklab, var(--secondary-bg) 70%, white);
+  border: 1px solid color-mix(in oklab, var(--farm-deep) 10%, #ffffff);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.farm-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.farm-input {
+  border: 1px solid color-mix(in oklab, var(--farm-deep) 18%, #ffffff);
+  border-radius: 12px;
+  background: #fff;
+  min-height: 42px;
+  color: var(--foreground);
+}
+
+.farm-input::placeholder {
+  color: var(--text-muted);
+}
+
+.farm-input:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--farm-sage) 55%, transparent);
+  outline-offset: 1px;
+}
+
+.farm-btn-primary {
+  background: var(--farm-deep);
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 180ms ease;
+}
+
+.farm-btn-primary:hover {
+  background: color-mix(in oklab, var(--farm-deep) 88%, black);
+}
+
+.farm-btn-danger {
+  background: color-mix(in oklab, var(--accent-red) 18%, white);
+  color: #8e2b2b;
+  border-radius: 12px;
+}
+
+.farm-table th {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.farm-table td {
+  font-size: 14px;
+}
+
+.farm-table tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--secondary-bg) 34%, white);
+}
+
+.farm-table tbody tr:hover {
+  background: color-mix(in oklab, var(--farm-fresh) 14%, white);
+}
+
+@keyframes farm-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.animate-pulse {
+  animation: farm-pulse 1.6s ease-in-out infinite;
 }
