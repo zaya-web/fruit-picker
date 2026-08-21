@@ -25,13 +25,9 @@ function getAuthSecret() {
   return 'fruit-picker-dev-secret';
 }
 
+/** Web-compatible base64url helpers (no Node Buffer — Edge/Proxy safe). */
 function bytesToBase64Url(bytes: ArrayBuffer | Uint8Array) {
   const view = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-
-  if (typeof Buffer !== 'undefined') {
-    return Buffer.from(view).toString('base64url');
-  }
-
   let binary = '';
   for (let i = 0; i < view.length; i += 1) {
     binary += String.fromCharCode(view[i]!);
@@ -43,10 +39,6 @@ function bytesToBase64Url(bytes: ArrayBuffer | Uint8Array) {
 }
 
 function base64UrlToBytes(value: string) {
-  if (typeof Buffer !== 'undefined') {
-    return new Uint8Array(Buffer.from(value, 'base64url'));
-  }
-
   const padded = value.replace(/-/g, '+').replace(/_/g, '/');
   const pad =
     padded.length % 4 === 0 ? '' : '='.repeat(4 - (padded.length % 4));

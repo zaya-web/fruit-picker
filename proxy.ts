@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { decodeSession, SESSION_COOKIE } from '@/app/lib/session-token';
+import { decodeSession, SESSION_COOKIE } from './app/lib/session-token';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const session = await decodeSession(token);
   const { pathname } = request.nextUrl;
