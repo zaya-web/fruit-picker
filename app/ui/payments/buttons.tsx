@@ -1,6 +1,6 @@
 'use client';
 
-import { deletePayment } from '@/app/lib/actions';
+import { deletePayment } from '@/app/lib/actions/payments';
 import { EditLink, PrimaryLink } from '@/app/ui/components';
 import DeleteButton from '@/app/ui/common/delete-button';
 

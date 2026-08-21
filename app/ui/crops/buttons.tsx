@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteFruit } from '@/app/lib/actions';
+import { deleteFruit } from '@/app/lib/actions/crops';
 import { EditLink, PrimaryLink } from '@/app/ui/components';
 import DeleteButton from '@/app/ui/common/delete-button';
 

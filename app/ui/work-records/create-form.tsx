@@ -4,7 +4,7 @@ import { useActionState, useState } from 'react';
 import {
   createWorkRecord,
   type WorkRecordFormState,
-} from '@/app/lib/actions';
+} from '@/app/lib/actions/work-records';
 import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 import type { FruitOption, SelectOption } from '@/app/ui/select-options';
 

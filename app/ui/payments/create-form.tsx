@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState, useMemo, useState } from 'react';
-import { createPayment, type PaymentFormState } from '@/app/lib/actions';
+import {
+  createPayment,
+  type PaymentFormState,
+} from '@/app/lib/actions/payments';
 import type {
   WorkerBalance,
   WorkerFruitBreakdown,

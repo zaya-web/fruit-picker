@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import { createFruit, type FruitFormState } from '@/app/lib/actions';
+import {
+  createFruit,
+  type FruitFormState,
+} from '@/app/lib/actions/crops';
 import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 
 const initialState: FruitFormState = {

@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteWorker } from '@/app/lib/actions';
+import { deleteWorker } from '@/app/lib/actions/workers';
 import { EditLink, PrimaryLink } from '@/app/ui/components';
 import DeleteButton from '@/app/ui/common/delete-button';
 

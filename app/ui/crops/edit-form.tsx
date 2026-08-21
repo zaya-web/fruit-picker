@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import { updateFruit, type FruitFormState } from '@/app/lib/actions';
+import {
+  updateFruit,
+  type FruitFormState,
+} from '@/app/lib/actions/crops';
 import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 import type { Fruit } from '@prisma/client';
 

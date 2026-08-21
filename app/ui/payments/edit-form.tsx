@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import { updatePayment, type PaymentFormState } from '@/app/lib/actions';
+import {
+  updatePayment,
+  type PaymentFormState,
+} from '@/app/lib/actions/payments';
 import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 import type { SelectOption } from '@/app/ui/select-options';
 

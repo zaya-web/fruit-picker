@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import { createWorker, type WorkerFormState } from '@/app/lib/actions';
+import {
+  createWorker,
+  type WorkerFormState,
+} from '@/app/lib/actions/workers';
 import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 
 const initialState: WorkerFormState = {

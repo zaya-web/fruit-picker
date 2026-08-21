@@ -1,7 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import { updateWorker, type WorkerFormState } from '@/app/lib/actions';
+import {
+  updateWorker,
+  type WorkerFormState,
+} from '@/app/lib/actions/workers';
 import { FormField, FormShell, farmFieldClass } from '@/app/ui/common/form-shell';
 import type { Worker } from '@prisma/client';
 
